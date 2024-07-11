@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace TGHMAuto
 {
@@ -57,21 +54,21 @@ namespace TGHMAuto
                 if(values.Length >= 2)
                 {
                     accountInfo.Index = int.Parse(values[0]);
-                    accountInfo.Title = values[1];
+                    accountInfo.Title = fileName.Replace(String.Format("{0}-", values[0]), "");
                 }
                 using (StreamReader reader = new StreamReader(path))
                 {
                     string line;
                     while ((line = reader.ReadLine()) != null)
                     {
-                        string patternUser = @"user:(\w+)";
+                        string patternUser = @"user:([^\s]+)";
                         Match match = Regex.Match(line, patternUser);
                         if (match.Success)
                         {
                             string userValue = match.Groups[1].Value;
                             accountInfo.Username = userValue;
                         }
-                        string patternPwd = @"pwd:(\w+)";
+                        string patternPwd = @"pwd:([^\s]+)";
                         match = Regex.Match(line, patternPwd);
                         if (match.Success)
                         {
@@ -124,6 +121,12 @@ namespace TGHMAuto
                 save(files.Count + 1, txtTitle.Text, txtUsername.Text, txtPassword.Text);
                 prompt.Close();
             };
+
+            Button cancel = new Button() { Text = "Cancel", Left = 175, Width = 80, Top = 225, TabIndex = 3, TabStop = true };
+            cancel.Click += (sender, e) =>
+            {
+                prompt.Close();
+            };
             prompt.FormBorderStyle = FormBorderStyle.FixedSingle;
             prompt.MaximizeBox = false;
             prompt.MinimizeBox = false;
@@ -139,7 +142,11 @@ namespace TGHMAuto
             prompt.Controls.Add(cmbx);
             prompt.Controls.Add(confirmation);
             prompt.AcceptButton = confirmation;
-            prompt.StartPosition = FormStartPosition.WindowsDefaultLocation;
+
+            prompt.Controls.Add(cancel);
+            prompt.CancelButton = cancel;
+
+            prompt.StartPosition = FormStartPosition.CenterParent;
             prompt.FormClosed += formClosed;
             prompt.ShowDialog();
         }
@@ -182,12 +189,22 @@ namespace TGHMAuto
                     save(accountInfo.Index, txtTitle.Text, txtUsername.Text, txtPassword.Text);
                     prompt.Close();
                 };
-                Button btnDelete = new Button() { Text = "Delete", Left = 100, Width = 80, Top = 225, TabIndex = 1, TabStop = true };
+                Button btnDelete = new Button() { Text = "Delete", Left = 92, Width = 80, Top = 225, TabIndex = 2, TabStop = true };
                 btnDelete.Click += (sender, e) =>
                 {
-                    File.Delete(String.Format(@"{0}.bat", fileName));
+                    DialogResult result = MessageBox.Show($"Xóa tài khoản [{fileName}]?", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (result == DialogResult.OK)
+                    {
+                        File.Delete(String.Format(@"{0}.bat", fileName));
+                        prompt.Close();
+                    }
+                };
+                Button cancel = new Button() { Text = "Cancel", Left = 175, Width = 80, Top = 225, TabIndex = 3, TabStop = true };
+                cancel.Click += (sender, e) =>
+                {
                     prompt.Close();
                 };
+
                 prompt.FormBorderStyle = FormBorderStyle.FixedSingle;
                 prompt.MaximizeBox = false;
                 prompt.MinimizeBox = false;
@@ -204,7 +221,10 @@ namespace TGHMAuto
                 prompt.Controls.Add(confirmation);
                 prompt.AcceptButton = confirmation;
                 prompt.Controls.Add(btnDelete);
-                prompt.StartPosition = FormStartPosition.WindowsDefaultLocation;
+                prompt.Controls.Add(cancel);
+                prompt.CancelButton = cancel;
+
+                prompt.StartPosition = FormStartPosition.CenterParent;
                 prompt.FormClosed += formClosed;
                 prompt.ShowDialog();
             }

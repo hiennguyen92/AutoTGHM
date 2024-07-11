@@ -63,18 +63,40 @@ namespace WindowNameChanger
             WindowNameChanger.EnumWindows(callBackPtr, 0);
         }
 
-        public static WindowListItem getWindow()
+        private static WindowInfo GetWindow(string title)
         {
+            string currentTitle = title;
+            if (string.IsNullOrEmpty(currentTitle))
+            {
+                currentTitle = "The GioiHoan My";
+            }
             RefreshWindowsList();
-
-            KeyValuePair<IntPtr, string> window = Windows.Where(kp => kp.Value.Equals("The GioiHoan My", StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
-
-            return new WindowListItem { HWnd = window.Key, WindowName = window.Value };
+            KeyValuePair<IntPtr, string> window = Windows.Where(kp => kp.Value.Equals(currentTitle, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+            return new WindowInfo { HWnd = window.Key, WindowName = window.Value };
         }
 
+        public static bool ChangeWindowTitle(string title, string newTitle)
+        {
+            WindowInfo windowInfo = GetWindow(title);
+            if (windowInfo.HWnd != IntPtr.Zero && windowInfo.WindowName != null) {
+                return SetWindowText(windowInfo.HWnd, newTitle);
+            }
+            return false;
+        }
+
+        public static WindowInfo GetWindowInfo(String title)
+        {
+            WindowInfo windowInfo = GetWindow(title);
+            if (windowInfo.HWnd != IntPtr.Zero && windowInfo.WindowName != null)
+            {
+                return windowInfo;
+            }
+            return null;
+            
+        }
     }
 
-    public class WindowListItem
+    public class WindowInfo
     {
         public IntPtr HWnd;
         public string WindowName = string.Empty;

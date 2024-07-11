@@ -31,25 +31,25 @@
             this.txtPathFolder = new System.Windows.Forms.TextBox();
             this.btnSelectedFolder = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.lvAccount = new System.Windows.Forms.ListView();
-            this.Column1Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Column2Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Column3Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnUpdate = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.dataGridViewAccount = new System.Windows.Forms.DataGridView();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAccount)).BeginInit();
             this.SuspendLayout();
             // 
             // txtPathFolder
             // 
             this.txtPathFolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPathFolder.Enabled = false;
-            this.txtPathFolder.Location = new System.Drawing.Point(13, 35);
+            this.txtPathFolder.Location = new System.Drawing.Point(3, 5);
             this.txtPathFolder.Name = "txtPathFolder";
-            this.txtPathFolder.Size = new System.Drawing.Size(298, 20);
+            this.txtPathFolder.Size = new System.Drawing.Size(178, 20);
             this.txtPathFolder.TabIndex = 1;
             // 
             // btnSelectedFolder
             // 
-            this.btnSelectedFolder.Location = new System.Drawing.Point(317, 35);
+            this.btnSelectedFolder.Location = new System.Drawing.Point(187, 3);
             this.btnSelectedFolder.Name = "btnSelectedFolder";
             this.btnSelectedFolder.Size = new System.Drawing.Size(75, 23);
             this.btnSelectedFolder.TabIndex = 2;
@@ -60,7 +60,7 @@
             // btnAdd
             // 
             this.btnAdd.Enabled = false;
-            this.btnAdd.Location = new System.Drawing.Point(317, 297);
+            this.btnAdd.Location = new System.Drawing.Point(207, 426);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 3;
@@ -68,37 +68,10 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // lvAccount
-            // 
-            this.lvAccount.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Column1Name,
-            this.Column2Name,
-            this.Column3Name});
-            this.lvAccount.Enabled = false;
-            this.lvAccount.HideSelection = false;
-            this.lvAccount.Location = new System.Drawing.Point(12, 61);
-            this.lvAccount.Name = "lvAccount";
-            this.lvAccount.Size = new System.Drawing.Size(380, 230);
-            this.lvAccount.TabIndex = 4;
-            this.lvAccount.UseCompatibleStateImageBehavior = false;
-            this.lvAccount.View = System.Windows.Forms.View.List;
-            // 
-            // Column1Name
-            // 
-            this.Column1Name.Width = 176;
-            // 
-            // Column2Name
-            // 
-            this.Column2Name.Width = 100;
-            // 
-            // Column3Name
-            // 
-            this.Column3Name.Width = 100;
-            // 
             // btnUpdate
             // 
             this.btnUpdate.Enabled = false;
-            this.btnUpdate.Location = new System.Drawing.Point(236, 297);
+            this.btnUpdate.Location = new System.Drawing.Point(126, 426);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.TabIndex = 5;
@@ -106,23 +79,53 @@
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.txtPathFolder);
+            this.panel1.Controls.Add(this.btnSelectedFolder);
+            this.panel1.Location = new System.Drawing.Point(13, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(269, 32);
+            this.panel1.TabIndex = 6;
+            // 
+            // dataGridViewAccount
+            // 
+            this.dataGridViewAccount.AllowUserToAddRows = false;
+            this.dataGridViewAccount.AllowUserToDeleteRows = false;
+            this.dataGridViewAccount.AllowUserToResizeColumns = false;
+            this.dataGridViewAccount.AllowUserToResizeRows = false;
+            this.dataGridViewAccount.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridViewAccount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewAccount.ColumnHeadersVisible = false;
+            this.dataGridViewAccount.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.dataGridViewAccount.Location = new System.Drawing.Point(12, 50);
+            this.dataGridViewAccount.MultiSelect = false;
+            this.dataGridViewAccount.Name = "dataGridViewAccount";
+            this.dataGridViewAccount.ReadOnly = true;
+            this.dataGridViewAccount.RowHeadersVisible = false;
+            this.dataGridViewAccount.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dataGridViewAccount.Size = new System.Drawing.Size(270, 370);
+            this.dataGridViewAccount.TabIndex = 7;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 331);
+            this.ClientSize = new System.Drawing.Size(294, 461);
+            this.Controls.Add(this.dataGridViewAccount);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnUpdate);
-            this.Controls.Add(this.lvAccount);
             this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.btnSelectedFolder);
-            this.Controls.Add(this.txtPathFolder);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "TGHMAuto";
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAccount)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -130,11 +133,9 @@
         private System.Windows.Forms.TextBox txtPathFolder;
         private System.Windows.Forms.Button btnSelectedFolder;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.ListView lvAccount;
-        private System.Windows.Forms.ColumnHeader Column1Name;
-        private System.Windows.Forms.ColumnHeader Column2Name;
-        private System.Windows.Forms.ColumnHeader Column3Name;
         private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridView dataGridViewAccount;
     }
 }
 
